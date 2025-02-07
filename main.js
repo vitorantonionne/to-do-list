@@ -16,7 +16,7 @@ novaTarefa.addEventListener("keyup", (e) => {
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Página carregada',localStorage.getItem('tarefas'));
-
+  
   const cachedTarefas = JSON.parse(localStorage.getItem('tarefas'));
   
   cachedTasks.push(...cachedTarefas)
@@ -24,11 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
   cachedTasks.forEach((value) => {
     const listaItem = createElementTarefa(value)
     listaDeTarefas.appendChild(listaItem)
-
   })
 
 });
 
+function Mode() {
+  const html = document.documentElement
+
+  html.classList.toggle('light')
+}
 
 function createElementTarefa(tarefa) {
   
@@ -39,7 +43,6 @@ function createElementTarefa(tarefa) {
   const checkTarefa = document.createElement("button")
   checkTarefa.className = "btn-check"
   checkTarefa.innerHTML = `<i class="ph ph-check"></i>`
-
 
   const buttonEditar = document.createElement("button");
   buttonEditar.className = "btn-editar";
@@ -61,9 +64,10 @@ function createElementTarefa(tarefa) {
 
   buttonFechar.addEventListener("click" , () => {    
      listaDeTarefas.removeChild(listaItem)
-     const valueListItem = listaItem.getAttribute('value')      
+
+     const valueListItem = listaItem.getAttribute("value") 
      cachedTasks = cachedTasks.filter((task) => task !== valueListItem)
-     localStorage.setItem('tarefas', JSON.stringify(cachedTasks))
+     localStorage.setItem("tarefas", JSON.stringify(cachedTasks))
   })
 
   checkTarefa.addEventListener("click", () => {
@@ -77,54 +81,41 @@ function createElementTarefa(tarefa) {
   return listaItem
 }
 
-function Mode() {
-  const html = document.documentElement
-
-  html.classList.toggle('light')
-}
-
 function addLista() {
   let tarefa = novaTarefa.value
   if(tarefa) {
 
     const listaItem  = createElementTarefa(tarefa)
-    
     listaDeTarefas.appendChild(listaItem)
 
     cachedTasks.push(tarefa)
     localStorage.setItem('tarefas', JSON.stringify(cachedTasks))
 
     novaTarefa.value = ""
-
   }
 }
 
 function editarTarefa(span) {
   const textoAtual = span.textContent;
 
+  const inputEdicaoTarefa = document.createElement("input");
+  inputEdicaoTarefa.type = "text";
+  inputEdicaoTarefa.value = textoAtual;
+  inputEdicaoTarefa.className = "input-edicao";
 
-  const inputEdicao = document.createElement("input");
-  inputEdicao.type = "text";
-  inputEdicao.value = textoAtual;
-  inputEdicao.className = "input-edicao";
-
-  span.replaceWith(inputEdicao);
-  inputEdicao.focus();
-
-  inputEdicao.addEventListener("keyup", (e) => {
+  span.replaceWith(inputEdicaoTarefa);
+  inputEdicaoTarefa.focus();
+  
+  inputEdicaoTarefa.addEventListener("keyup", (e) => {
     if (e.key === "Enter") {
-      salvarEdicao(inputEdicao, span);
+      salvarEdicao(inputEdicaoTarefa, span);
     }
-  });
-
-  inputEdicao.addEventListener("blur", () => {
-    salvarEdicao(inputEdicao, span);
   });
 }
 
 function salvarEdicao(input, span) {
-  const novoTexto = input.value.trim();
-
+  const novoTexto = input.value;
+  
   if (novoTexto) {
     span.textContent = novoTexto;
   }

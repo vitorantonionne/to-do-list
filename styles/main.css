@@ -223,6 +223,11 @@ main {
 .input-edicao {
   border: none;
   outline: none;
+  font-family: "Inter", serif;
+  font-size: 16px;
+  font-style: normal;
+  color: var(--text-color);
+  background-color: transparent;
 }
 
 .input-edicao:focus {
