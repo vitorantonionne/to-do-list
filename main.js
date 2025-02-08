@@ -34,15 +34,28 @@ function Mode() {
   html.classList.toggle('light')
 }
 
+function objTarefa(conteudo) {
+  return {
+    id: Date.now(),
+    conteudo,
+    feito: false
+  }
+}
+
 function createElementTarefa(tarefa) {
   
   const listaItem = document.createElement("li")
   listaItem.className = "lista-item"
-  listaItem.setAttribute("value", tarefa)
+  listaItem.setAttribute("value", tarefa.id)
+
+  if (tarefa.feito) {
+    listaItem.classList.add("feito")
+  }
 
   const checkTarefa = document.createElement("button")
-  checkTarefa.className = "btn-check"
+  checkTarefa.className = tarefa.feito ? "btn-check feito" : "btn-check"
   checkTarefa.innerHTML = `<i class="ph ph-check"></i>`
+
 
   const buttonEditar = document.createElement("button");
   buttonEditar.className = "btn-editar";
@@ -50,7 +63,7 @@ function createElementTarefa(tarefa) {
 
   const span = document.createElement("span")
   span.className = "tarefa"
-  span.textContent = tarefa
+  span.textContent = tarefa.conteudo
 
   const buttonFechar = document.createElement("button")
   buttonFechar.className = "btn-fechar"
@@ -62,16 +75,22 @@ function createElementTarefa(tarefa) {
   listaItem.appendChild(buttonFechar)
 
 
-  buttonFechar.addEventListener("click" , () => {    
-     listaDeTarefas.removeChild(listaItem)
+  buttonFechar.addEventListener("click" , () => {
+    listaDeTarefas.removeChild(listaItem)
 
-     const valueListItem = listaItem.getAttribute("value") 
-     cachedTasks = cachedTasks.filter((task) => task !== valueListItem)
-     localStorage.setItem("tarefas", JSON.stringify(cachedTasks))
+    const valueListItem = Number(listaItem.getAttribute("value")) 
+    cachedTasks = cachedTasks.filter((task) => task.id !== valueListItem)
+    
+    localStorage.setItem("tarefas", JSON.stringify(cachedTasks))
   })
 
+  
   checkTarefa.addEventListener("click", () => {
     listaItem.classList.toggle("feito")
+    tarefa.feito = !tarefa.feito
+    checkTarefa.classList = tarefa.feito ? "btn-check feito" : "btn-check";
+
+    AtualizarLocalStorage()
   })
 
   span.addEventListener("click", () => {
@@ -81,15 +100,21 @@ function createElementTarefa(tarefa) {
   return listaItem
 }
 
-function addLista() {
-  let tarefa = novaTarefa.value
-  if(tarefa) {
+function AtualizarLocalStorage() {
+  localStorage.setItem("tarefas", JSON.stringify(cachedTasks))
+}
 
+function addLista() {
+  let newTarefa = novaTarefa.value
+
+  if(newTarefa) {
+    const tarefa = objTarefa(newTarefa)
     const listaItem  = createElementTarefa(tarefa)
     listaDeTarefas.appendChild(listaItem)
 
     cachedTasks.push(tarefa)
-    localStorage.setItem('tarefas', JSON.stringify(cachedTasks))
+
+    AtualizarLocalStorage()
 
     novaTarefa.value = ""
   }
