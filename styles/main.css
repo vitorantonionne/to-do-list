@@ -14,25 +14,25 @@
   --bg-color-button: #0D51AE;
   --bg-color-button-hover: #5084ce;
 
-  --bg-color-button-switch:  #ffffff;
+  --bg-color-button-switch: #ffffff;
 }
 
 .light {
   --text-color: #343A40;
   --bg-color-body: #F8F9FA;
-  
+
   --bg-color-main: #aeafb6;
   --box-shadow-main: 2px 2px 50px #DEE2E6;
 
   --bg-color-button: #9499b0;
   --bg-color-button-hover: #06043249;
 
-  --bg-color-button-switch:  #c1d5e1;
+  --bg-color-button-switch: #c1d5e1;
 }
 
 body {
   height: 100vh;
-  background:  var(--bg-color-body);
+  background: var(--bg-color-body);
   font-family: "Inter", serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -60,7 +60,7 @@ body {
   background-color: var(--bg-color-button-switch);
   border: none;
   border-radius: 99px;
-  transition:0.3s ease-in-out;
+  transition: 0.6s ease-in-out;
 }
 
 .switch button:hover {
@@ -78,7 +78,7 @@ main {
   min-width: 300px;
   width: 90%;
   max-width: 600px;
-  
+
   background-color: var(--bg-color-main);
   border-radius: 10px;
   box-shadow: var(--box-shadow-main);
@@ -102,7 +102,7 @@ main {
   margin-bottom: 20px;
 }
 
-#form-container input{
+#form-container input {
   width: 100%;
   background-color: #e3e3e3;
   padding-left: 15px;
@@ -116,8 +116,8 @@ main {
 
 #form-container button {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
   height: 100%;
   width: 13%;
 
@@ -157,7 +157,8 @@ main {
   margin-left: auto;
 }
 
-.btn-check, .btn-fechar {
+.btn-check,
+.btn-fechar {
   height: 30px;
   width: 30px;
 
@@ -166,7 +167,7 @@ main {
   border-radius: 100px;
 
   cursor: pointer;
-  transition:0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 
   font-size: 13px;
 }
@@ -180,12 +181,13 @@ main {
   border-radius: 100px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.5);
-  
-  transition:0.3s ease-in-out;
-  .lista-item.feito & {
-      color: #fff;
-      background-color: var(--bg-color-button-hover);
-  }
+
+  transition: 0.3s ease-in-out;
+}
+
+.lista-item.feito .btn-check {
+  color: #fff;
+  background-color: var(--bg-color-button-hover);
 }
 
 .lista-item.feito {
@@ -200,7 +202,6 @@ main {
   cursor: pointer;
 }
 
-
 .btn-editar {
   height: 30px;
   width: 30px;
@@ -209,7 +210,6 @@ main {
   align-items: center;
   justify-content: center;
   font-size: 13px;
-
 
   border: none;
   border: 2px solid rgba(0, 0, 0, 0.2);
