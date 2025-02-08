@@ -83,7 +83,6 @@ function createElementTarefa(tarefa) {
     
     localStorage.setItem("tarefas", JSON.stringify(cachedTasks))
   })
-
   
   checkTarefa.addEventListener("click", () => {
     listaItem.classList.toggle("feito")

@@ -13,17 +13,21 @@
 
   --bg-color-button: #0D51AE;
   --bg-color-button-hover: #5084ce;
+
+  --bg-color-button-switch:  #ffffff;
 }
 
 .light {
-  --text-color: #625b5b;
-  --bg-color-body: #cbcede;
+  --text-color: #343A40;
+  --bg-color-body: #F8F9FA;
   
   --bg-color-main: #aeafb6;
-  --box-shadow-main: 2px 2px 50px rgba(88, 85, 85, 0.189);
+  --box-shadow-main: 2px 2px 50px #DEE2E6;
 
   --bg-color-button: #9499b0;
   --bg-color-button-hover: #06043249;
+
+  --bg-color-button-switch:  #c1d5e1;
 }
 
 body {
@@ -50,17 +54,18 @@ body {
 .switch button {
   width: 45px;
   height: 30px;
-  color: rgb(137, 127, 214);
+  color: var(--text-color);
   cursor: pointer;
 
-  background-color: #FFFFFF;
+  background-color: var(--bg-color-button-switch);
   border: none;
   border-radius: 99px;
+  transition:0.3s ease-in-out;
 }
 
 .switch button:hover {
   color: #FFFFFF;
-  background-color: #0D51AE;
+  background-color: #717375;
 }
 
 main {
